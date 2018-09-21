@@ -10,10 +10,42 @@
           <p class="card-text">{{data.team2}}</p>
           <p class="card-text">{{data.sport}}</p>
           <p class="card-text">{{data.start_time |  formatDate}}</p>
-          <a href="#" class="btn btn-primary">See Focused View</a>
+           <button type="button" class="btn btn-primary" @click="viewPost(data)" data-toggle="modal" data-target="#myModal">
+            See Focused View
+          </button>
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">{{post.championship}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <p class="card-text">{{post.team1}}</p>
+          <p class="card-text">{{post.team2}}</p>
+          <p class="card-text">{{post.sport}}</p>
+          <p class="card-text">{{post.start_time |  formatDate}}</p>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+</div>
+  
+
+
 
   </div>
 </template>
@@ -32,6 +64,14 @@ export default {
     appName: String
   },
 
+  data(){
+    return{
+
+      post:{}
+
+    }
+  },
+
   computed:{...mapState(['primary','secondary'])},
 
   filters: {
@@ -40,7 +80,14 @@ export default {
         let date = moment(val).format('L');
         return date
     }
- }
+ },
+
+   methods:{
+      viewPost(post){
+        console.log('called',post)
+          this.post = post
+      }
+   }
 }
 </script>
 
