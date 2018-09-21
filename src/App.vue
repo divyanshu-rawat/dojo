@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+      <p>Dojo Madness !!</p>
+    </div>
+    <HelloWorld msg="Dojo"/>
   </div>
 </template>
 
@@ -19,7 +22,7 @@ export default {
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialias;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
