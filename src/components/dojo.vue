@@ -1,51 +1,26 @@
 <template>
   <div class="hello">
     <h2>{{appName}}</h2>
+    <h4>Primary Data</h4>
 
-<div class="row">
-    <div class="card col-lg-4"  v-for = "data in primary" :key="primary.indexOf(data)">
-        <div class="card-body">
-          <h4 class="card-title">{{data.championship}}</h4>
-          <p class="card-text">{{data.team1}}</p>
-          <p class="card-text">{{data.team2}}</p>
-          <p class="card-text">{{data.sport}}</p>
-          <p class="card-text">{{data.start_time |  formatDate}}</p>
-           <button type="button" class="btn btn-primary" @click="viewPost(data)" data-toggle="modal" data-target="#myModal">
-            See Focused View
-          </button>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card col-lg-12"  v-for = "data in primary" :key="primary.indexOf(data)">
+            <div class="card-body">
+              <h4 class="card-title">{{data.championship}}</h4>
+              <p class="card-text">{{data.team1}}</p>
+              <p class="card-text">{{data.team2}}</p>
+              <p class="card-text">{{data.sport}}</p>
+              <p class="card-text">{{data.start_time |  formatDate}}</p>
+               <button type="button" class="btn btn-primary" @click="viewPost(data)" data-toggle="modal" data-target="#myModal">
+                See Focused View
+              </button>
+            </div>
         </div>
+       </div>
     </div>
-</div>
-
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">{{post.championship}}</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-          <p class="card-text">{{post.team1}}</p>
-          <p class="card-text">{{post.team2}}</p>
-          <p class="card-text">{{post.sport}}</p>
-          <p class="card-text">{{post.start_time |  formatDate}}</p>
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        
-      </div>
-    </div>
-</div>
   
-
-
+    <Modal :post = 'post'/>
 
   </div>
 </template>
@@ -53,8 +28,9 @@
 <script>
 
 import { mapState } from 'vuex'
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.js'
+import Modal from './modal.vue'
 import moment from 'moment'
 
 
@@ -64,16 +40,16 @@ export default {
     appName: String
   },
 
-  data(){
-    return{
-
-      post:{}
-
-    }
+  components: {
+    Modal
   },
 
+  data(){
+    return{
+      post:{}
+    }
+  },
   computed:{...mapState(['primary','secondary'])},
-
   filters: {
     formatDate(val) {
         if (!val) { return '-' }
@@ -81,10 +57,8 @@ export default {
         return date
     }
  },
-
-   methods:{
+  methods:{
       viewPost(post){
-        console.log('called',post)
           this.post = post
       }
    }

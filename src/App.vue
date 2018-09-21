@@ -7,6 +7,7 @@
 <script>
 import Dojo from './components/dojo.vue'
 
+
 export default {
   name: 'app',
   components: {
