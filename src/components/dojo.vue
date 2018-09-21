@@ -3,9 +3,9 @@
 <div class="hello">
    <h2>{{appName}}</h2>
    <div class="row">
-         <div class="card col-sm-5"  v-for = "data in primary" :key="primary.indexOf(data)">
+         <div class="card col-sm-5"  v-for = "(data,index) in primary" :key="primary.indexOf(data)">
             <List  :data = 'data'/>
-            <button type="button" class="btn btn-primary _MARGIN" data-toggle="modal" @click="viewPost(data)" data-target="#myModal">
+            <button type="button" class="btn btn-primary _MARGIN" data-toggle="modal" @click="viewPost(data,index)" data-target="#myModal">
             See Focused View
           </button>
          </div>
@@ -45,8 +45,9 @@ export default {
   computed:{...mapState(['primary','secondary'])},
 
   methods:{
-    viewPost(value){
+    viewPost(value,index){
       this.post = value
+      this.post.index = index
     }
   }
 }
