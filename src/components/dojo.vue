@@ -1,27 +1,28 @@
 <template>
   <div class="hello">
     <h2>{{appName}}</h2>
-    <h4>Primary Data</h4>
 
     <div class="row">
-      <div class="col-lg-4">
+
+      <div class="col-lg-5">
+         <h4>Primary Data</h4>
         <div class="card col-lg-12"  v-for = "data in primary" :key="primary.indexOf(data)">
-            <div class="card-body">
-              <h4 class="card-title">{{data.championship}}</h4>
-              <p class="card-text">{{data.team1}}</p>
-              <p class="card-text">{{data.team2}}</p>
-              <p class="card-text">{{data.sport}}</p>
-              <p class="card-text">{{data.start_time |  formatDate}}</p>
-               <button type="button" class="btn btn-primary" @click="viewPost(data)" data-toggle="modal" data-target="#myModal">
-                See Focused View
-              </button>
-            </div>
+           
+            <List :data = 'data'/>
         </div>
+      </div>
+        <div class="col-lg-5 offset-lg-2">
+          <h4>Secondary Data</h4>
+            <div class="card col-lg-12"  v-for = "data in secondary" :key="secondary.indexOf(data)">
+                
+                <List :data = 'data'/>
+            </div>
+         </div>
+      
        </div>
+    
     </div>
   
-    <Modal :post = 'post'/>
-
   </div>
 </template>
 
@@ -30,8 +31,9 @@
 import { mapState } from 'vuex'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
-import Modal from './modal.vue'
+import List from './list.vue'
 import moment from 'moment'
+
 
 
 export default {
@@ -39,29 +41,10 @@ export default {
   props: {
     appName: String
   },
-
   components: {
-    Modal
-  },
-
-  data(){
-    return{
-      post:{}
-    }
+    List
   },
   computed:{...mapState(['primary','secondary'])},
-  filters: {
-    formatDate(val) {
-        if (!val) { return '-' }
-        let date = moment(val).format('L');
-        return date
-    }
- },
-  methods:{
-      viewPost(post){
-          this.post = post
-      }
-   }
 }
 </script>
 

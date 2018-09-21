@@ -11,7 +11,7 @@ export const store = new Vuex.Store({
 	state:{
 
 		primary  : primary,
-		seconary : secondary 
+		secondary : secondary 
 
 	},
 

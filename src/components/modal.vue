@@ -6,16 +6,16 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">{{post.championship}}</h4>
+          <h5 class="modal-title">Championship: {{post.championship}}</h5>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
         <div class="modal-body">
-          <p class="card-text">{{post.team1}}</p>
-          <p class="card-text">{{post.team2}}</p>
-          <p class="card-text">{{post.sport}}</p>
-          <p class="card-text">{{post.start_time |  formatDate}}</p>
+          <p class="card-text">Team 1 : {{post.team1}}</p>
+          <p class="card-text">Team 2 : {{post.team2}}</p>
+          <p class="card-text">Sport  : {{post.sport}}</p>
+          <p class="card-text">Date   : {{post.start_time |  formatDate}}</p>
         </div>
         
         <!-- Modal footer -->
