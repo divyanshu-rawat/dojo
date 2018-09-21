@@ -1,20 +1,21 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <div class="container">
-      <p>Dojo Madness !!</p>
-    </div>
-    <HelloWorld msg="Dojo"/>
+  <div id="app" class="container">
+    <Dojo appName="Dojo Madness GmbH"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Dojo from './components/dojo.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Dojo
+  },
+
+  mounted(){
+    // eslint-disable-next-line
+    console.log('Store Created!')
   }
 }
 </script>
@@ -24,8 +25,6 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialias;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
