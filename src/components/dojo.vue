@@ -1,29 +1,20 @@
 <template>
-  <div class="hello">
-    <h2>{{appName}}</h2>
 
-    <div class="row">
-
-      <div class="col-lg-5">
-         <h4>Primary Data</h4>
-        <div class="card col-lg-12"  v-for = "data in primary" :key="primary.indexOf(data)">
-           
-            <List :data = 'data'/>
-        </div>
-      </div>
-        <div class="col-lg-5 offset-lg-2">
-          <h4>Secondary Data</h4>
-            <div class="card col-lg-12"  v-for = "data in secondary" :key="secondary.indexOf(data)">
-                
-                <List :data = 'data'/>
-            </div>
+<div class="hello">
+   <h2>{{appName}}</h2>
+   <div class="row">
+         <div class="card col-sm-5"  v-for = "data in primary" :key="primary.indexOf(data)">
+            <List  :data = 'data'/>
+            <button type="button" class="btn btn-primary _MARGIN" data-toggle="modal" @click="viewPost(data)" data-target="#myModal">
+            See Focused View
+          </button>
          </div>
-      
-       </div>
-    
-    </div>
-  
-  </div>
+   </div>
+
+   <Modal :post = "post"/>
+
+</div>
+
 </template>
 
 <script>
@@ -32,19 +23,32 @@ import { mapState } from 'vuex'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import List from './list.vue'
+import Modal from './modal.vue'
 import moment from 'moment'
 
 
 
 export default {
   name: 'Dojo',
+
+  data(){
+    return{
+        post : {}
+    }
+  },
   props: {
     appName: String
   },
   components: {
-    List
+    List, Modal
   },
   computed:{...mapState(['primary','secondary'])},
+
+  methods:{
+    viewPost(value){
+      this.post = value
+    }
+  }
 }
 </script>
 
@@ -64,6 +68,9 @@ li {
 }
 
 .card{
+  margin: 5px !important;
+}
+._MARGIN{
   margin: 5px !important;
 }
 

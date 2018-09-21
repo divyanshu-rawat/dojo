@@ -1,5 +1,7 @@
 
 <template>
+
+<div class="modal-wrapper">
  <div class="modal fade" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -12,10 +14,10 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-          <p class="card-text">Team 1 : {{post.team1}}</p>
-          <p class="card-text">Team 2 : {{post.team2}}</p>
-          <p class="card-text">Sport  : {{post.sport}}</p>
-          <p class="card-text">Date   : {{post.start_time |  formatDate}}</p>
+          <p class="card-text"><b>Team 1 : </b> {{post.team1}} <i class="fa fa-pencil-square-o fa-lg" /> </p>
+          <p class="card-text"><b>Team 2 : </b> {{post.team2}} <i class="fa fa-pencil-square-o fa-lg" /> </p>
+          <p class="card-text"><b>Sport  : </b> {{post.sport}} <i class="fa fa-pencil-square-o fa-lg" /> </p>
+          <p class="card-text"><b>Date   : </b> {{post.start_time |  formatDate}} <i class="fa fa-pencil-square-o fa-lg" /> </p>
         </div>
         
         <!-- Modal footer -->
@@ -26,10 +28,14 @@
       </div>
     </div>
 </div>
+</div>
 </template>
 
 <script>
+
 import moment from 'moment'
+import 'font-awesome/css/font-awesome.css'
+import 'bootstrap/dist/css/bootstrap.css'
 
 export default{
 
@@ -37,13 +43,34 @@ export default{
 	props: {
     	post: Object
     },
+    data(){
+      return{
+        edit: false
+      }
+    },
     filters: {
     formatDate(val) {
         if (!val) { return '-' }
         let date = moment(val).format('L');
         return date
     }
- }
+ },
+
+  updated(){
+    // console.log('Updated',this.post);
+  },
+
+  created(){
+    // console.log('Created',this.unique);
+  }
 }
 
 </script>
+
+<style scoped>
+  
+.fa.fa-pencil-square-o{
+  cursor: pointer !important;
+}
+
+</style>
