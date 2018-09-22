@@ -19,17 +19,23 @@
       <div v-if = "!edit_team_one" class="_MARGIN">
         <p class="card-text"><b>Team 1 : </b> {{post.team1}} </p>
         
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_team_one()">
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_team_one">
          <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></span>
         </button>
+
+
 
       </div>
 
       <div v-if = "edit_team_one" class="_MARGIN">
-        <input class="form-control col-lg-5" v-model = "post.team1"/>
+        <b>Team 1 :</b> <input class="form-control col-lg-5" :value = "post.team1" @input = "getVal_team_one"/>
 
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_team_one()">
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="set_team_one">
          <span class="fa fa-check fa-lg" aria-hidden="true"></span>
+        </button>
+
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_team_one">
+         <span class="fa fa-close fa-lg" aria-hidden="true"></span>
         </button>
 
       </div>
@@ -38,18 +44,23 @@
        <div v-if = "!edit_team_two" class="_MARGIN">
         <p class="card-text"><b>Team 2 : </b> {{post.team2}} </p>
         
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_team_two()">
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_team_two">
          <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></span>
         </button>
 
       </div>
 
       <div v-if = "edit_team_two" class="_MARGIN">
-        <input class="form-control col-lg-5" v-model = "post.team2"/>
+        <b>Team 2 :</b> <input class="form-control col-lg-5" :value = "post.team2" @input = "getVal_team_two"/>
 
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_team_two()">
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="set_team_two">
          <span class="fa fa-check fa-lg" aria-hidden="true"></span>
         </button>
+
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_team_two">
+         <span class="fa fa-close fa-lg" aria-hidden="true"></span>
+        </button>
+
 
       </div>
 
@@ -57,38 +68,46 @@
 <!--  toggle_date()-->
 
       <div v-if = "!edit_date" class="_MARGIN">
-        <p class="card-text"><b>Team 2 : </b> {{post.start_time |  formatDate}} </p>
+        <p class="card-text"><b>Date : </b> {{post.start_time |  formatDate}} </p>
         
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_date()">
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_date">
          <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></span>
         </button>
 
       </div>
 
       <div v-if = "edit_date" class="_MARGIN">
-        <input class="form-control col-lg-5" v-model = "post.start_time |  formatDate"/>
+        <b>Date :</b> <input class="form-control col-lg-5" :value = "post.start_time |  formatDate" @input = "getVal_team_date"/>
 
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_date()">
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="set_date">
          <span class="fa fa-check fa-lg" aria-hidden="true"></span>
+        </button>
+
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_date">
+         <span class="fa fa-close fa-lg" aria-hidden="true"></span>
         </button>
       </div>
 
 
     
       <div v-if = "!edit_sport" class="_MARGIN">
-        <p class="card-text"><b>Team 2 : </b> {{post.sport}} </p>
+        <p class="card-text"><b>Sport : </b> {{post.sport}} </p>
         
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_sport()">
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_sport">
          <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></span>
         </button>
 
       </div>
 
       <div v-if = "edit_sport" class="_MARGIN">
-        <input class="form-control col-lg-5" v-model = "post.sport"/>
+        <b>Sport :</b> <input class="form-control col-lg-5" v-model = "post.sport" @input = "getVal_team_sport"/>
 
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_sport()">
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="set_sport">
          <span class="fa fa-check fa-lg" aria-hidden="true"></span>
+        </button>
+
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_sport">
+         <span class="fa fa-close fa-lg" aria-hidden="true"></span>
         </button>
 
       </div>
@@ -129,6 +148,14 @@ export default{
         edit_team_two: false,
         edit_date: false,
         edit_sport: false,
+        edit_championship: false,
+
+        set_team_one_value: null,
+        set_team_two_value: null,
+        set_championship_value: null,
+        set_date_value: null,
+        set_sport_value: null,
+        set_championship_value: null
       }
     },
     filters: {
@@ -144,17 +171,64 @@ export default{
     updateModel(){},
     doNotUpdate(){},
 
-    toggle_team_one(val){
+// Team One
+    getVal_team_one($event){
+      this.set_team_one_value = $event.target.value
+    },
+
+    set_team_one(){
+      this.post.team1 = this.set_team_one_value
       this.edit_team_one = !this.edit_team_one
     },
-    toggle_team_two(val){
+    unset_team_one(){
+      this.edit_team_one = !this.edit_team_one
+    },
+
+// Team Two
+
+    getVal_team_two($event){
+        this.set_team_two_value = $event.target.value
+    },
+
+    set_team_two(){
+       this.post.team2 = this.set_team_two_value
+       this.edit_team_two = !this.edit_team_two
+    },
+
+    unset_team_two(){
       this.edit_team_two = !this.edit_team_two
     },
-    toggle_date(val){
-      this.edit_date     = !this.edit_date
+
+// Date
+
+    getVal_team_date($event){
+       this.set_date_value = $event.target.value
     },
-    toggle_sport(val){
-      this.edit_sport    = !this.edit_sport
+
+    set_date(){
+      console.log('value of date',this.set_date_value)
+
+      let date = moment(this.set_date_value).format('L');
+      this.post.date = date
+      this.edit_date = !this.edit_date
+    },
+
+    unset_date(){
+      this.edit_date = !this.edit_date
+    },
+
+
+// Sport
+
+    getVal_team_sport(val){
+      this.set_sport_value = $event.target.value
+    },
+    set_sport(){
+      this.post.sport = this.set_sport_value
+      this.edit_sport = !this.edit_sport
+    },
+    unset_sport(){
+      this.edit_sport = !this.edit_sport
     }
   },
 
