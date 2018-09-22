@@ -32,7 +32,7 @@ export default {
     }
   },
   created(){
-    console.log('Created',this.data);
+    // console.log('Created',this.data);
   }
 }
 </script>

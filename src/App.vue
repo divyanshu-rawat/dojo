@@ -1,11 +1,14 @@
 <template>
   <div id="app" class="container">
+    <!-- <Dojo appName="Dojo Madness GmbH" :primary = "primary" :secondary: = "secondary"/> -->
     <Dojo appName="Dojo Madness GmbH"/>
   </div>
 </template>
 
 <script>
 import Dojo from './components/dojo.vue'
+import primary from "./data_set/primary"
+import secondary from "./data_set/secondary"
 
 
 export default {
@@ -14,9 +17,16 @@ export default {
     Dojo
   },
 
+  data(){
+    return{
+      // primary: primary,
+      // secondary : secondary
+    }
+  },
+
   mounted(){
     // eslint-disable-next-line
-    console.log('Store Created!')
+    // console.log('Store Created!')
   }
 }
 </script>

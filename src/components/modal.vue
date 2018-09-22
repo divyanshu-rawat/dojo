@@ -26,14 +26,14 @@
       </div>
 
       <div v-if = "edit_team_one" class="_MARGIN">
-        <input class="form-control col-lg-5" :value= "post.team1"/>
+        <input class="form-control col-lg-5"  @input = "changeval" v-model = "post.team1"/>
 
         <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_team_one()">
-         <span class="fa fa-check fa-lg" aria-hidden="true"></span>
+         <span class="fa fa-check fa-lg" aria-hidden="true" @click = "updateModel"></span>
         </button>
 
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_team_one()">
-         <span class="fa fa-times fa-lg" aria-hidden="true"></span>
+        <button type="button" class="btn btn-primary" aria-label="Left Align" >
+         <span class="fa fa-times fa-lg" aria-hidden="true" @click = "doNotUpdate"></span>
         </button>
 
         <!-- <i class="fa fa-times fa-lg" aria-hidden="true"></i> -->
@@ -57,9 +57,9 @@
          <span class="fa fa-check fa-lg" aria-hidden="true"></span>
         </button>
 
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_team_two()">
+        <!-- <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_team_two()">
          <span class="fa fa-times fa-lg" aria-hidden="true"></span>
-        </button>
+        </button> -->
 
         <!-- <i class="fa fa-times fa-lg" aria-hidden="true"></i> -->
         <!-- <i class="fa fa-check fa-lg" aria-hidden="true"></i> -->
@@ -84,9 +84,9 @@
          <span class="fa fa-check fa-lg" aria-hidden="true"></span>
         </button>
 
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_date()">
+       <!--  <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_date()">
          <span class="fa fa-times fa-lg" aria-hidden="true"></span>
-        </button>
+        </button> -->
 
         <!-- <i class="fa fa-times fa-lg" aria-hidden="true"></i> -->
         <!-- <i class="fa fa-check fa-lg" aria-hidden="true"></i> -->
@@ -113,9 +113,9 @@
          <span class="fa fa-check fa-lg" aria-hidden="true"></span>
         </button>
 
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_sport()">
+      <!--   <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_sport()">
          <span class="fa fa-times fa-lg" aria-hidden="true"></span>
-        </button>
+        </button> -->
 
         <!-- <i class="fa fa-times fa-lg" aria-hidden="true"></i> -->
         <!-- <i class="fa fa-check fa-lg" aria-hidden="true"></i> -->
@@ -141,19 +141,28 @@
 import moment from 'moment'
 import 'font-awesome/css/font-awesome.css'
 import 'bootstrap/dist/css/bootstrap.css'
+import $ from 'jquery'
+import { mapState } from 'vuex'
+import _ from 'lodash';
 
 export default{
 
 	name: 'Modal',
-	props: {
-    	post: Object
-    },
-    data(){
+	props:{
+    post : Object,
+    test : String
+  },
+  
+  data: function(){
       return{
         edit_team_one: false,
         edit_team_two: false,
         edit_date: false,
-        edit_sport: false
+        edit_sport: false,
+        localcopy: null,
+
+        divyanshu: null
+        // testcopy: {...this.post}
       }
     },
     filters: {
@@ -165,8 +174,35 @@ export default{
  },
 
   methods:{
+
+    changeval($event){
+      console.log('divyanshu',this.divyanshu)
+
+      // this.localcopy.team_one = $event.target.value
+    },
+    updateModel(){
+   
+    },
+    doNotUpdate(){
+
+      console.log('deep',this.post)
+      // console.log(this.test)
+      // let bcd = this.test
+      // let abc = _.clone(this.test);
+      // console.log('abc',abc)
+      // this.localcopy = _.clone(this.test);
+
+      // console.log('bcd',this.localcopy)
+      // if
+
+      this.post.team1 = this.post.deepCopy.team1
+      console.log('do not update');
+       this.edit_team_one = !this.edit_team_one
+      // console.log('update_loa_user',this.localUser.team1);
+    },
     toggle_team_one(val){
       this.edit_team_one = !this.edit_team_one
+      // console.log('New',this.new_data.team1);
     },
     toggle_team_two(val){
       this.edit_team_two = !this.edit_team_two
@@ -180,12 +216,27 @@ export default{
   },
 
   updated(){
-    console.log('Updated');
+
+    console.log('deep',this.post.deepCopy.team1)
+    // console.log(this.localcopy.length)
+    // if(this.localcopy.length == undefined){
+        // let new_obj =  this.post
+
+        // this.localcopy.team_one = this.post.team1
+    // }
+
+    // if(this.localcopy){
+    //    this.localcopy = _.clone(this.test);
+    // }
   },
 
-  created(){
-    // console.log('Created',this.unique);
-  }
+  beforeUpdate(){
+  },
+  mounted(){
+  },
+  watch:{
+
+  },
 }
 
 </script>

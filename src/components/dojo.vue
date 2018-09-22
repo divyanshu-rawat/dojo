@@ -11,7 +11,7 @@
          </div>
    </div>
 
-   <Modal :post = "post"/>
+   <Modal :post = "post" :test = "post.team1"/>
 
 </div>
 
@@ -37,7 +37,9 @@ export default {
     }
   },
   props: {
-    appName: String
+    appName: String,
+    // primary: Array,
+    // Secondary: Array,
   },
   components: {
     List, Modal
@@ -48,6 +50,7 @@ export default {
     viewPost(value,index){
       this.post = value
       this.post.index = index
+      this.post.deepCopy = _.clone(value);
     }
   }
 }
