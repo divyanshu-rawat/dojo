@@ -8,7 +8,7 @@
       
       <!-- Modal Header -->
       <div class="modal-header">
-        <h5 class="modal-title">Championship: {{post.championship}} - {{post.index}}</h5>
+        <h5 class="modal-title">Championship: {{post.championship}}</h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       
@@ -26,18 +26,12 @@
       </div>
 
       <div v-if = "edit_team_one" class="_MARGIN">
-        <input class="form-control col-lg-5"  @input = "changeval" v-model = "post.team1"/>
+        <input class="form-control col-lg-5" v-model = "post.team1"/>
 
         <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_team_one()">
-         <span class="fa fa-check fa-lg" aria-hidden="true" @click = "updateModel"></span>
+         <span class="fa fa-check fa-lg" aria-hidden="true"></span>
         </button>
 
-        <button type="button" class="btn btn-primary" aria-label="Left Align" >
-         <span class="fa fa-times fa-lg" aria-hidden="true" @click = "doNotUpdate"></span>
-        </button>
-
-        <!-- <i class="fa fa-times fa-lg" aria-hidden="true"></i> -->
-        <!-- <i class="fa fa-check fa-lg" aria-hidden="true"></i> -->
       </div>
 
 <!-- toggle_team_two() -->
@@ -51,18 +45,12 @@
       </div>
 
       <div v-if = "edit_team_two" class="_MARGIN">
-        <input class="form-control col-lg-5" :value= "post.team2"/>
+        <input class="form-control col-lg-5" v-model = "post.team2"/>
 
         <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_team_two()">
          <span class="fa fa-check fa-lg" aria-hidden="true"></span>
         </button>
 
-        <!-- <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_team_two()">
-         <span class="fa fa-times fa-lg" aria-hidden="true"></span>
-        </button> -->
-
-        <!-- <i class="fa fa-times fa-lg" aria-hidden="true"></i> -->
-        <!-- <i class="fa fa-check fa-lg" aria-hidden="true"></i> -->
       </div>
 
 
@@ -78,24 +66,14 @@
       </div>
 
       <div v-if = "edit_date" class="_MARGIN">
-        <input class="form-control col-lg-5" :value= "post.start_time |  formatDate"/>
+        <input class="form-control col-lg-5" v-model = "post.start_time |  formatDate"/>
 
         <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_date()">
          <span class="fa fa-check fa-lg" aria-hidden="true"></span>
         </button>
-
-       <!--  <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_date()">
-         <span class="fa fa-times fa-lg" aria-hidden="true"></span>
-        </button> -->
-
-        <!-- <i class="fa fa-times fa-lg" aria-hidden="true"></i> -->
-        <!-- <i class="fa fa-check fa-lg" aria-hidden="true"></i> -->
       </div>
 
 
-
-
-<!--  toggle_sport()-->
     
       <div v-if = "!edit_sport" class="_MARGIN">
         <p class="card-text"><b>Team 2 : </b> {{post.sport}} </p>
@@ -107,25 +85,18 @@
       </div>
 
       <div v-if = "edit_sport" class="_MARGIN">
-        <input class="form-control col-lg-5" :value= "post.sport"/>
+        <input class="form-control col-lg-5" v-model = "post.sport"/>
 
         <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_sport()">
          <span class="fa fa-check fa-lg" aria-hidden="true"></span>
         </button>
 
-      <!--   <button type="button" class="btn btn-primary" aria-label="Left Align" @click="toggle_sport()">
-         <span class="fa fa-times fa-lg" aria-hidden="true"></span>
-        </button> -->
-
-        <!-- <i class="fa fa-times fa-lg" aria-hidden="true"></i> -->
-        <!-- <i class="fa fa-check fa-lg" aria-hidden="true"></i> -->
       </div>
 
 
 <!--  -->
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Save Changes</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
         
@@ -149,8 +120,7 @@ export default{
 
 	name: 'Modal',
 	props:{
-    post : Object,
-    test : String
+    post : Object
   },
   
   data: function(){
@@ -159,10 +129,6 @@ export default{
         edit_team_two: false,
         edit_date: false,
         edit_sport: false,
-        localcopy: null,
-
-        divyanshu: null
-        // testcopy: {...this.post}
       }
     },
     filters: {
@@ -175,34 +141,11 @@ export default{
 
   methods:{
 
-    changeval($event){
-      console.log('divyanshu',this.divyanshu)
+    updateModel(){},
+    doNotUpdate(){},
 
-      // this.localcopy.team_one = $event.target.value
-    },
-    updateModel(){
-   
-    },
-    doNotUpdate(){
-
-      console.log('deep',this.post)
-      // console.log(this.test)
-      // let bcd = this.test
-      // let abc = _.clone(this.test);
-      // console.log('abc',abc)
-      // this.localcopy = _.clone(this.test);
-
-      // console.log('bcd',this.localcopy)
-      // if
-
-      this.post.team1 = this.post.deepCopy.team1
-      console.log('do not update');
-       this.edit_team_one = !this.edit_team_one
-      // console.log('update_loa_user',this.localUser.team1);
-    },
     toggle_team_one(val){
       this.edit_team_one = !this.edit_team_one
-      // console.log('New',this.new_data.team1);
     },
     toggle_team_two(val){
       this.edit_team_two = !this.edit_team_two
@@ -215,28 +158,10 @@ export default{
     }
   },
 
-  updated(){
-
-    console.log('deep',this.post.deepCopy.team1)
-    // console.log(this.localcopy.length)
-    // if(this.localcopy.length == undefined){
-        // let new_obj =  this.post
-
-        // this.localcopy.team_one = this.post.team1
-    // }
-
-    // if(this.localcopy){
-    //    this.localcopy = _.clone(this.test);
-    // }
-  },
-
-  beforeUpdate(){
-  },
-  mounted(){
-  },
-  watch:{
-
-  },
+  updated(){},
+  beforeUpdate(){},
+  mounted(){},
+  watch:{},
 }
 
 </script>

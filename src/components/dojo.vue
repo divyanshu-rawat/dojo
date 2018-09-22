@@ -50,7 +50,7 @@ export default {
     viewPost(value,index){
       this.post = value
       this.post.index = index
-      this.post.deepCopy = _.clone(value);
+      // this.post.deepCopy = _.clone(value);    Removing Deepcopy
     }
   }
 }
