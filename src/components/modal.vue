@@ -67,6 +67,32 @@
 
 <!--  toggle_date()-->
 
+    
+      <div v-if = "!edit_sport" class="_MARGIN">
+        <p class="card-text"><b>Sport : </b> {{post.sport}} </p>
+        
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_sport">
+         <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></span>
+        </button>
+
+      </div>
+
+      <div v-if = "edit_sport" class="_MARGIN">
+        <b>Sport :</b> <input class="form-control col-lg-5" @input = "getVal_team_sport"/>
+
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="set_sport">
+         <span class="fa fa-check fa-lg" aria-hidden="true"></span>
+        </button>
+
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_sport">
+         <span class="fa fa-close fa-lg" aria-hidden="true"></span>
+        </button>
+
+      </div>
+
+
+<!-- Toggle Sport -->
+
       <div v-if = "!edit_date" class="_MARGIN">
         <p class="card-text"><b>Date : </b> {{post.start_time |  formatDate}} </p>
         
@@ -86,30 +112,6 @@
         <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_date">
          <span class="fa fa-close fa-lg" aria-hidden="true"></span>
         </button>
-      </div>
-
-
-    
-      <div v-if = "!edit_sport" class="_MARGIN">
-        <p class="card-text"><b>Sport : </b> {{post.sport}} </p>
-        
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_sport">
-         <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></span>
-        </button>
-
-      </div>
-
-      <div v-if = "edit_sport" class="_MARGIN">
-        <b>Sport :</b> <input class="form-control col-lg-5" v-model = "post.sport" @input = "getVal_team_sport"/>
-
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="set_sport">
-         <span class="fa fa-check fa-lg" aria-hidden="true"></span>
-        </button>
-
-        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_sport">
-         <span class="fa fa-close fa-lg" aria-hidden="true"></span>
-        </button>
-
       </div>
 
 
@@ -206,10 +208,7 @@ export default{
     },
 
     set_date(){
-      console.log('value of date',this.set_date_value)
-
-      let date = moment(this.set_date_value).format('L');
-      this.post.date = date
+      this.post.start_time = this.set_date_value
       this.edit_date = !this.edit_date
     },
 
@@ -220,7 +219,7 @@ export default{
 
 // Sport
 
-    getVal_team_sport(val){
+    getVal_team_sport($event){
       this.set_sport_value = $event.target.value
     },
     set_sport(){
