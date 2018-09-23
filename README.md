@@ -22,3 +22,6 @@ Lints and fixes files.
 ```
 npm run lint
 ```
+
+
+![Alt Text](https://github.com/divyanshu-rawat/dojo/blob/master/Assets/screencast.gif)
