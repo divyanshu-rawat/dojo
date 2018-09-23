@@ -103,7 +103,7 @@
       </div>
 
       <div v-if = "edit_date" class="_MARGIN">
-        <b>Date :</b> <input class="form-control col-lg-5" :value = "post.start_time |  formatDate" @input = "getVal_team_date"/>
+        <b>Date (MM/DD/YY) :</b> <input class="form-control col-lg-5" :value = "post.start_time |  formatDate" @input = "getVal_team_date"/>
 
         <button type="button" class="btn btn-primary" aria-label="Left Align" @click="set_date">
          <span class="fa fa-check fa-lg" aria-hidden="true"></span>
@@ -163,7 +163,7 @@ export default{
     filters: {
     formatDate(val) {
         if (!val) { return '-' }
-        let date = moment(val).format('L');
+        let date = moment(val).format("MM/DD/YYYY");
         return date
     }
  },
@@ -204,7 +204,9 @@ export default{
 // Date
 
     getVal_team_date($event){
-       this.set_date_value = $event.target.value
+       this.set_date_value = Date.parse($event.target.value)
+       console.log('pasrsed date', Date.parse($event.target.value))
+       console.log('Origninal Date', moment($event.target.value).format("MM/DD/YYYY"))
     },
 
     set_date(){

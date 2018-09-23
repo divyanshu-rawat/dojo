@@ -3,7 +3,7 @@
 <div class="hello">
    <h2>{{appName}}</h2>
    <div class="row">
-         <div class="card col-sm-5"  v-for = "(data,index) in primary" :key="primary.indexOf(data)">
+         <div class="card col-sm-5"  v-for = "(data,index) in orderedUsers" :key="orderedUsers.indexOf(data)">
             <List  :data = 'data'/>
             <button type="button" class="btn btn-primary _MARGIN" data-toggle="modal" @click="viewPost(data,index)" data-target="#myModal">
             See Focused View
@@ -25,6 +25,7 @@ import 'bootstrap/dist/js/bootstrap.js'
 import List from './list.vue'
 import Modal from './modal.vue'
 import moment from 'moment'
+import _ from 'lodash';
 
 
 
@@ -44,7 +45,13 @@ export default {
   components: {
     List, Modal
   },
-  computed:{...mapState(['primary','secondary'])},
+  computed:{
+    ...mapState(['primary','secondary']),
+
+    orderedUsers(){
+      return _.orderBy(this.primary, 'start_time')
+    }
+  },
 
   methods:{
     viewPost(value,index){
@@ -52,6 +59,10 @@ export default {
       this.post.index = index
       // this.post.deepCopy = _.clone(value);    Removing Deepcopy
     }
+  },
+
+  updated(){
+    console.log('data updated');
   }
 }
 </script>

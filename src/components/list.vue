@@ -5,7 +5,7 @@
           <p class="card-text"><b>Team 1 : </b> {{data.team1}}</p>
           <p class="card-text"><b>Team 2 : </b> {{data.team2}}</p>
           <p class="card-text"><b>Sport  : </b> {{data.sport}}</p>
-          <p class="card-text"><b>Date   : </b> {{data.start_time |  formatDate}}</p>
+          <p class="card-text"><b>Date (MM/DD/YY)   : </b> {{data.start_time |  formatDate}}</p>
         </div>
   </div>
 
@@ -27,7 +27,7 @@ export default {
   filters: {
     formatDate(val) {
         if (!val) { return '-' }
-        let date = moment(val).format('L');
+        let date = moment(val).format("MM/DD/YYYY");
         return date
     }
   },
