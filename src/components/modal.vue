@@ -8,9 +8,33 @@
       
       <!-- Modal Header -->
       <div class="modal-header">
-        <h5 class="modal-title">Championship: {{post.championship}}</h5>
+
+        <div v-if = "!edit_championship" class="_MARGIN">
+        <p class="card-text"><b>Championship :</b>{{post.championship}}</p>
+        
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_championship">
+         <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></span>
+        </button>
+
+      </div>
+
+      <div v-if = "edit_championship" class="_MARGIN">
+        <b>Championship :</b> <input class="form-control col-lg-5" :value = "post.championship" @input = "getVal_championship"/>
+
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="set_championship">
+         <span class="fa fa-check fa-lg" aria-hidden="true"></span>
+        </button>
+
+        <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_championship">
+         <span class="fa fa-close fa-lg" aria-hidden="true"></span>
+        </button>
+
+      </div>
+        
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
+
+     
       
       <!-- Modal body -->
     <div class="modal-body">
@@ -65,7 +89,7 @@
       </div>
 
 
-<!--  toggle_date()-->
+<!--  Toggle Sport()-->
 
     
       <div v-if = "!edit_sport" class="_MARGIN">
@@ -78,7 +102,7 @@
       </div>
 
       <div v-if = "edit_sport" class="_MARGIN">
-        <b>Sport :</b> <input class="form-control col-lg-5" @input = "getVal_team_sport"/>
+        <b>Sport :</b> <input class="form-control col-lg-5"  :value = "post.sport"  @input = "getVal_team_sport"/>
 
         <button type="button" class="btn btn-primary" aria-label="Left Align" @click="set_sport">
          <span class="fa fa-check fa-lg" aria-hidden="true"></span>
@@ -91,10 +115,10 @@
       </div>
 
 
-<!-- Toggle Sport -->
+<!-- Toggle Date -->
 
       <div v-if = "!edit_date" class="_MARGIN">
-        <p class="card-text"><b>Date : </b> {{post.start_time |  formatDate}} </p>
+        <p class="card-text"><b>Date (TimeStamp): </b> {{post.start_time}} </p>
         
         <button type="button" class="btn btn-primary" aria-label="Left Align" @click="unset_date">
          <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></span>
@@ -103,7 +127,7 @@
       </div>
 
       <div v-if = "edit_date" class="_MARGIN">
-        <b>Date (MM/DD/YY) :</b> <input class="form-control col-lg-5" :value = "post.start_time |  formatDate" @input = "getVal_team_date"/>
+        <b>Date (TimeStamp) :</b> <input class="form-control col-lg-5" :value = "post.start_time" @input = "getVal_team_date"/>
 
         <button type="button" class="btn btn-primary" aria-label="Left Align" @click="set_date">
          <span class="fa fa-check fa-lg" aria-hidden="true"></span>
@@ -133,9 +157,7 @@
 import moment from 'moment'
 import 'font-awesome/css/font-awesome.css'
 import 'bootstrap/dist/css/bootstrap.css'
-import $ from 'jquery'
 import { mapState } from 'vuex'
-import _ from 'lodash';
 
 export default{
 
@@ -157,7 +179,6 @@ export default{
         set_championship_value: null,
         set_date_value: null,
         set_sport_value: null,
-        set_championship_value: null
       }
     },
     filters: {
@@ -170,8 +191,23 @@ export default{
 
   methods:{
 
-    updateModel(){},
-    doNotUpdate(){},
+
+// Championship
+
+    getVal_championship($event){
+      this.set_championship_value = $event.target.value
+    },
+
+    set_championship(){
+      this.post.championship = this.set_championship_value
+      this.edit_championship = !this.edit_championship
+    },
+    unset_championship(){
+      this.edit_championship = !this.edit_championship
+    },
+
+
+
 
 // Team One
     getVal_team_one($event){
@@ -204,9 +240,9 @@ export default{
 // Date
 
     getVal_team_date($event){
-       this.set_date_value = Date.parse($event.target.value)
-       console.log('pasrsed date', Date.parse($event.target.value))
-       console.log('Origninal Date', moment($event.target.value).format("MM/DD/YYYY"))
+       this.set_date_value = $event.target.value
+       // console.log('pasrsed date', Date.parse($event.target.value))
+       // console.log('Origninal Date', moment($event.target.value).format("MM/DD/YYYY"))
     },
 
     set_date(){
@@ -233,9 +269,21 @@ export default{
     }
   },
 
-  updated(){},
-  beforeUpdate(){},
-  mounted(){},
+  computed : {
+    ...mapState(['secondary'])
+  },
+
+  updated(){ 
+              // console.log(this.secondary) 
+              // console.log('post',this.post)
+  },
+  beforeUpdate(){
+
+  },
+  mounted(){
+    // console.log(this.secondary) 
+              // console.log('post',this.post)
+  },
   watch:{},
 }
 

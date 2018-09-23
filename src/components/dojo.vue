@@ -3,15 +3,16 @@
 <div class="hello">
    <h2>{{appName}}</h2>
    <div class="row">
-         <div class="card col-sm-5"  v-for = "(data,index) in orderedUsers" :key="orderedUsers.indexOf(data)">
+         <div class="card col-sm-5"  v-for = "(data) in orderedUsers" :key="orderedUsers.indexOf(data)">
+
             <List  :data = 'data'/>
-            <button type="button" class="btn btn-primary _MARGIN" data-toggle="modal" @click="viewPost(data,index)" data-target="#myModal">
+            <button type="button" class="btn btn-primary _MARGIN" data-toggle="modal" @click="viewPost(data)" data-target="#myModal">
             See Focused View
           </button>
          </div>
    </div>
 
-   <Modal :post = "post" :test = "post.team1"/>
+   <Modal :post = "post"/>
 
 </div>
 
@@ -24,7 +25,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import List from './list.vue'
 import Modal from './modal.vue'
-import moment from 'moment'
 import _ from 'lodash';
 
 
@@ -34,13 +34,11 @@ export default {
 
   data(){
     return{
-        post : {}
+        post : {},
     }
   },
   props: {
     appName: String,
-    // primary: Array,
-    // Secondary: Array,
   },
   components: {
     List, Modal
@@ -54,15 +52,17 @@ export default {
   },
 
   methods:{
-    viewPost(value,index){
+    viewPost(value){
       this.post = value
-      this.post.index = index
+      // this.post.index = index
+
       // this.post.deepCopy = _.clone(value);    Removing Deepcopy
     }
   },
 
+
   updated(){
-    console.log('data updated');
+    // console.log('data updated');
   }
 }
 </script>
