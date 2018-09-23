@@ -195,12 +195,20 @@ export default{
 // Championship
 
     getVal_championship($event){
+      console.log('hey',$event.target.value)
       this.set_championship_value = $event.target.value
     },
 
     set_championship(){
+
+      if(this.set_championship_value == null){
+         this.edit_championship = !this.edit_championship
+         return;
+      } 
+
       this.post.championship = this.set_championship_value
       this.edit_championship = !this.edit_championship
+     
     },
     unset_championship(){
       this.edit_championship = !this.edit_championship
@@ -215,6 +223,12 @@ export default{
     },
 
     set_team_one(){
+
+      if(this.set_team_one_value == null){
+          this.edit_team_one = !this.edit_team_one
+          return
+      }
+
       this.post.team1 = this.set_team_one_value
       this.edit_team_one = !this.edit_team_one
     },
@@ -229,6 +243,12 @@ export default{
     },
 
     set_team_two(){
+
+      if( this.set_team_two_value == null){
+          this.edit_team_two = !this.edit_team_two
+          return 
+      }
+
        this.post.team2 = this.set_team_two_value
        this.edit_team_two = !this.edit_team_two
     },
@@ -246,6 +266,13 @@ export default{
     },
 
     set_date(){
+
+      if(this.set_date_value == null){
+          this.edit_date = !this.edit_date
+          return
+
+      }
+
       this.post.start_time = this.set_date_value
       this.edit_date = !this.edit_date
     },
@@ -261,6 +288,12 @@ export default{
       this.set_sport_value = $event.target.value
     },
     set_sport(){
+
+      if(this.set_sport_value == null){
+        this.edit_sport = !this.edit_sport
+        return
+      }
+
       this.post.sport = this.set_sport_value
       this.edit_sport = !this.edit_sport
     },
