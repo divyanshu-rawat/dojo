@@ -86,7 +86,7 @@ export default {
     }
   },
 
-  mounted(){},
+  mounted(){ this.check_match(); console.log('called once')},
   updated(){this.check_match() }
 }
 </script>
